@@ -1,0 +1,111 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+void main() => runApp(MyApp());
+
+class MyApp extends StatelessWidget {
+  final List<Widget> contactsList = [
+    UserCard(image: 'assets/images/istockphoto.jpg', text: 'Joe Belfiore', phoneNum: 'Phone: +7 700 707 7070', dmy: '30.09.22',),
+    UserCard(image: 'assets/images/istockphoto2.jpg', text: 'Marissa Mayer', phoneNum: 'Phone: +7 707 123 5685', dmy: '3.04.22',),
+    UserCard(image: 'assets/images/istockphoto3.jpg', text: 'Miranda Summer', phoneNum: 'Phone: +7 778 852 3625', dmy: '12.03.22',),
+    UserCard(image: 'assets/images/istockphoto4.jpg', text: 'Sunday Picha', phoneNum: 'Phone: +7 701 987 4512', dmy: '26.02.22',),
+    UserCard(image: 'assets/images/istockphoto5.jpg', text: 'Hanna Bezos', phoneNum: 'Phone: +7 702 755 9638', dmy: '8.02.22',),
+    UserCard(image: 'assets/images/istockphoto.jpg', text: 'Joe Belfiore', phoneNum: 'Phone: +7 700 707 7070', dmy: '30.09.22',),
+    UserCard(image: 'assets/images/istockphoto2.jpg', text: 'Marissa Mayer', phoneNum: 'Phone: +7 707 123 5685', dmy: '3.04.22',),
+    
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(     
+            leading: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.list,color: Colors.black54,),
+            ),
+            centerTitle: true,
+            title: Text(
+              "Contacts",
+            ),
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black87,
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.black54,
+                ),
+                onPressed: () {},
+              )
+            ],
+          ),
+          body: Container(
+            height: double.infinity,
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: ListView(
+              children: contactsList,
+            ),
+          )),
+    );
+  }
+}
+
+class UserCard extends StatelessWidget {
+  final String image;
+  final String text;
+  final String phoneNum;
+  final String dmy;
+
+  const UserCard({required this.text, required this.phoneNum,required this.dmy, required this.image});
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15.0),
+        color: Colors.white,
+        boxShadow: <BoxShadow>[
+          BoxShadow(
+              color: Colors.black12, blurRadius: 10.0, offset: Offset(0.0, 0.20))
+        ],
+      ),
+      padding: EdgeInsets.all(10),
+      child: Row(
+        children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16.0),
+            height: 70.0,
+            width: 70.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(35),
+              color: Colors.red,
+              border: Border.all(width: 4, color: Colors.white),
+            ),
+            child: CircleAvatar(
+              backgroundImage: AssetImage(image),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    text,
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                  ),
+                  Text(phoneNum, style: TextStyle(fontSize: 13)),
+                  Text(dmy, style: TextStyle(fontSize: 13)),
+                ],
+              ),
+            ),
+          ),
+          Icon(Icons.more_vert,)
+        ],
+      ),
+    );
+  }
+}
