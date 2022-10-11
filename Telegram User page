@@ -1,0 +1,151 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  final List<SettingsInfoData> settingsName = [
+    SettingsInfoData(Icons.notifications, 'Уведомления и звуки'),
+    SettingsInfoData(Icons.privacy_tip, 'Конфиденциальность'),
+    SettingsInfoData(Icons.storage, 'Данные и память'),
+    SettingsInfoData(Icons.chat, 'Настройки чатов'),
+    SettingsInfoData(Icons.emoji_emotions, 'Стикеры и эмодзи'),
+    SettingsInfoData(Icons.folder, 'Папки'),
+    SettingsInfoData(Icons.device_hub, 'Устройства'),
+    SettingsInfoData(Icons.language, 'Язык'),
+  ];
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      //theme: ThemeData.dark(),
+      home: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          leading: IconButton(
+            onPressed: (){},
+            icon: Icon(Icons.arrow_back),
+          ),
+          actions: [
+            IconButton(
+              onPressed: (){}, 
+              icon: Icon(Icons.qr_code)),
+            IconButton(
+              onPressed: (){}, 
+              icon: Icon(Icons.search)),
+            IconButton(
+              onPressed: (){}, 
+              icon: Icon(Icons.more_vert))
+          ], 
+        ),
+        body: ListView(
+            children: [
+            Container(
+              color: Colors.blue,
+              padding: EdgeInsets.only(top: 10,bottom: 20),
+              child: Row(
+                children: [
+                Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                  height: 65.0,
+                  width: 65.0,
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage('assets/images/istockphoto2.jpg'),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Madina',
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600, color: Colors.white),
+                        ),
+                        Text('online', style: TextStyle(fontSize: 15, color: Colors.white)),                  
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+              ),
+            ),
+            UserInfo(),
+            Container(
+              padding: EdgeInsets.all(20),
+              child: Text('Настройки', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.blue)),),            
+            MenuRow(settingsName: settingsName),
+          ],)
+    ));
+  }
+}
+
+class SettingsInfoData {
+  final IconData icon;
+  final String text;
+
+  SettingsInfoData(this.icon, this.text);
+}
+
+class SettingsInfo extends StatelessWidget{
+  final SettingsInfoData data;
+
+  const SettingsInfo({Key? key, required this.data}) : super(key: key);
+  
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+      child: Row(children: [
+        Icon(data.icon),
+        SizedBox(width: 15,),
+        Expanded(child: Text(data.text)),
+      ]),
+    );
+  }
+}
+
+class MenuRow extends StatelessWidget {
+  List<SettingsInfoData> settingsName;
+  MenuRow({Key? key, required this.settingsName}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(children:
+        settingsName.map((data) => SettingsInfo(data: data,)).toList(),
+      ),
+    );
+  }
+}
+
+
+class UserInfo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: (        
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Аккаунт', style: TextStyle(fontWeight: FontWeight.w600, color: Colors.blue)),
+            SizedBox(height: 15,),
+            Text('+7 700 3716773', style: TextStyle(fontWeight: FontWeight.w500)),
+            SizedBox(height: 5,),
+            Text('Нажмите, чтобы изменить номер телефона'),
+            Divider(),
+            Text('@madinmt', style: TextStyle(fontWeight: FontWeight.w500)),
+            SizedBox(height: 5,),
+            Text('Имя пользователя'),
+            Divider(),
+            Text('О себе', style: TextStyle(fontWeight: FontWeight.w500)),
+            SizedBox(height: 5,),
+            Text('Напишите немного о себе')
+          ],
+        )
+      ),
+    );
+  }
+}
+
